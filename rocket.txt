@@ -1,0 +1,13 @@
+TO-DO:
+
+2019-06-12:
+   Need to gather specific impulse for each engine
+   calculate delta v for each stage
+   show results for each stage
+   show total delta v
+   maybe show delta v if rocket was just one stage
+
+2019-06-13:
+   Need to commit files to git
+   Clean up output and enable input code block
+   Implement error catching and exceptions
