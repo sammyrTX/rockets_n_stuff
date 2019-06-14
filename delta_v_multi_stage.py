@@ -93,10 +93,12 @@ if __name__ == "__main__":
 
     #         mass_struct = int(input('Enter structure mass (kg): '))
     #         mass_prop = int(input('Enter propellant mass (kg): '))
-
+            # specific_impulse = int(input('Enter specific impulse for
+            #                               engine (sec): '))
     #         mass_stage.append([mass_struct,
     #                            mass_prop,
-    #                            ])
+    #                            specific_impulse,
+                               # ])
 
     #         print('*** TEST *** mass_stage >>>', mass_stage[stage_add_data])
 
