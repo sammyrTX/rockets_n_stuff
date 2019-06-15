@@ -58,68 +58,107 @@ if __name__ == "__main__":
     #               mass of structure
     #               mass of propellant
 
-    ##### PRODUCTION INPUT CODE --- BYPASSING DURING BUILD
+    #### PRODUCTION INPUT CODE --- BYPASSING DURING BUILD
 
-    # while True:
-    #     try:
-    #         number_of_stages = int(input('Enter the number of stages: '))
-    #         specific_impulse = int(input('Enter the specific impulse (secs): '))
+    while True:
 
-    #     except Exception as e:
-    #         raise
-    #     else:
-    #         pass
-    #     finally:
-    #         pass
+        try:
+            number_of_stages = int(input('Enter the number of stages (n > 0): '))
 
-    #     try:
-    #         mass_payload = int(input('Enter payload mass (kg): '))
+            if number_of_stages <= 0:
+                print('Please enter an integer greater than zero')
+                continue
 
-    #     except Exception as e:
-    #         raise
-    #     else:
-    #         pass
-    #     finally:
-    #         pass
+        except ValueError as err:
+            print(err)
+            print('Please enter an integer greater than zero')
+            continue
+        break
 
-    #     if number_of_stages is None or number_of_stages == '':
-    #         break
+    while True:
+        try:
+            mass_payload = int(input('Enter payload mass (kg > 0): '))
 
-    #     if mass_payload == 0:
-    #         print('Payload mass is zero. Delta V will calculate without a payload')
+            if mass_payload <= 0:
+                print('Please enter an integer greater than zero')
+                continue
 
-    #     for stage_add_data in range(number_of_stages):
-    #         print('*** Stage - {} ***'.format(stage_add_data + 1))
+        except ValueError as err:
+            print(err)
+            print('Please enter an integer greater than zero')
+            continue
+        break
 
-    #         mass_struct = int(input('Enter structure mass (kg): '))
-    #         mass_prop = int(input('Enter propellant mass (kg): '))
-            # specific_impulse = int(input('Enter specific impulse for
-            #                               engine (sec): '))
-    #         mass_stage.append([mass_struct,
-    #                            mass_prop,
-    #                            specific_impulse,
-                               # ])
+    # Get structure, propellant & specific impulse for each stage
+    for stage_add_data in range(number_of_stages):
+        print('=' * 40)
+        print('*** Stage - {} ***'.format(stage_add_data + 1))
 
-    #         print('*** TEST *** mass_stage >>>', mass_stage[stage_add_data])
+        while True:
+            try:
+                mass_struct = int(input('Enter structure mass (kg > 0): '))
 
-    #     print('payload mass (kg):', mass_payload)
-    #     break
-    #
-    #
+                if mass_struct <= 0:
+                    print('Please enter an integer greater than zero')
+                    continue
+
+            except ValueError as err:
+                print(err)
+                print('Please enter an integer greater than zero')
+                continue
+            break
+
+        while True:
+            try:
+                mass_prop = int(input('Enter propellant mass (kg) > 0: '))
+
+                if mass_prop <= 0:
+                    print('Please enter an integer greater than zero')
+                    continue
+
+            except ValueError as err:
+                print(err)
+                print('Please enter an integer greater than zero')
+                continue
+            break
+
+        while True:
+            try:
+                specific_impulse = int(input('Enter specific impulse for engine(sec > 0): '))
+
+                if specific_impulse <= 0:
+                    print('Please enter an integer greater than zero')
+                    continue
+
+            except ValueError as err:
+                print(err)
+                print('Please enter an integer greater than zero')
+                continue
+            break
+
+        mass_stage.append([mass_struct,
+                           mass_prop,
+                           specific_impulse,
+                           ])
+
+    # TODO  REMOVE BEFORE FLIGHT
+    print('*** TEST *** mass_stage >>>', mass_stage[stage_add_data])
+    print('payload mass (kg):', mass_payload)
+
 ###############################################################################
 
-####### Input data for calculations during build phase #################
+# ####### Input data for calculations during build phase #################
 
-    # Mass for each stage
+#     # Mass for each stage
 
-    mass_stage = [[5000.0, 50000.0, 450],
-                  [5000.0, 50000.0, 450],
-                  [3000.0, 50000.0, 450],
-                  ]
+#     mass_stage = [[5000.0, 50000.0, 450],
+#                   [5000.0, 50000.0, 450],
+#                   [3000.0, 50000.0, 450],
+#                   ]
 
-    mass_payload = 5000.0
-    specific_impulse = 450
-    number_of_stages = 2
+#     mass_payload = 5000.0
+#     specific_impulse = 450
+#     number_of_stages = 2
 
 ###############################################################################
 
