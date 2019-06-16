@@ -175,8 +175,8 @@ if __name__ == "__main__":
 
     for delta_v_stage_number in range(0, number_of_stages):
 
-        mass_initial = 0.0
-        mass_final = 0.0
+        mass_initial = 0
+        mass_final = 0
 
         for current_stage in range(delta_v_stage_number, number_of_stages):
             print('stage number: ', delta_v_stage_number + 1)
@@ -191,12 +191,9 @@ if __name__ == "__main__":
         mass_final = mass_initial - mass_stage[delta_v_stage_number][1]
         v_exhaust = mass_stage[delta_v_stage_number][2] * GRAVITY_EARTH
 
-        print('Stage {} Mass Initial: {}'.format(delta_v_stage_number,
-                                                 mass_initial))
-        print('Stage {} Mass Final: {}'.format(delta_v_stage_number,
-                                               mass_final))
-        print('Stage {} V Exhaust: {}'.format(delta_v_stage_number,
-                                              v_exhaust))
+        print(f"Stage {delta_v_stage_number} Mass Initial: {mass_initial:,}")
+        print(f"Stage {delta_v_stage_number} Mass Final: {mass_final:,}")
+        print(f"Stage {delta_v_stage_number} V Exhaust: {v_exhaust:,.4f}")
 
         delta_v_data.append(delta_v_calc(mass_initial,
                                          mass_final,
@@ -205,13 +202,9 @@ if __name__ == "__main__":
 
         print('=' * 40)
 
-    print('delta_v_data:')
+    print('**** delta_v_data: ****')
 
-    stage_ = 1
-    for _ in delta_v_data:
-        print('Delta V for stage {}: {}'.format(stage_, _))
-        stage_ += 1
+    for _, delta_v_figure in enumerate(delta_v_data):
+        print(f"Delta V for stage {_ + 1}: {delta_v_figure:,.4f}")
 
-    print('Total Delta V: {}'.format(sum(delta_v_data)))
-
-    help(delta_v_calc)
+    print(f"Total Delta V: {sum(delta_v_data):,.4f}")
