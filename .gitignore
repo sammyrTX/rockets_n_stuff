@@ -1,2 +1,2 @@
-./delta_v_two_stage.py
-./__pycache__
+delta_v_two_stage.py
+__pycache__/
