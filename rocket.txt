@@ -1,10 +1,5 @@
 TO-DO:
 
-2019-06-15:
-   Cleanup/format output
-      - Remove Test Printouts
-   Test Output
-
 OPTIONAL:
    maybe show delta v if rocket was just one stage
 
@@ -18,3 +13,6 @@ OPTIONAL:
    Need to commit files to git
    Clean up output and enable input code block
    Implement error catching and exceptions
+   Cleanup/format output
+      - Remove Test Printouts
+   Quick Testing

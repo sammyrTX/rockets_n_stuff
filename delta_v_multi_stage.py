@@ -1,6 +1,13 @@
-# determine delta v for a multi stage rocket
-
 from delta_v_functions import delta_v_calc
+
+"""
+Calculate Delta-v for a multi-stage rocket
+
+User will be initially prompted for the number of stages and payload mass of the rocket. Then for each stage the user will provide the mass of the structure and propellant as well as the Specific Impulse for the engine in that stage.
+
+Total Delta-v and Delta-v for each stage will be calculated utilizing
+the Ideal Rocket Equation aka Tsiolkovsky Rocket Equation
+"""
 
 ############################ CONSTANTS ########################################
 
@@ -48,17 +55,16 @@ delta_v_data = list()
 if __name__ == "__main__":
 
 ############################ INPUTS ###########################################
-    #
-    # Gather number of stages and then gather information for each stage
-    # Inputs: number of stages
-    #         mass of payload
-    #         Specific Impulse of each engine (assumes one engine per stage)
-    #
-    #         For each stage:
-    #               mass of structure
-    #               mass of propellant
-
-    #### PRODUCTION INPUT CODE --- BYPASSING DURING BUILD
+#
+# Gather number of stages and then gather information for each stage
+# Inputs: number of stages
+#         mass of payload
+#
+#
+#         For each stage:
+#               mass of structure
+#               mass of propellant
+#               Specific Impulse of each engine (assumes one engine per stage)
 
     while True:
 
@@ -67,6 +73,9 @@ if __name__ == "__main__":
 
             if number_of_stages <= 0:
                 print('Please enter an integer greater than zero')
+                continue
+            if number_of_stages >= 10:
+                print('If you need that many stages please contact Starfleet. You may want to consider Warp technology.')
                 continue
 
         except ValueError as err:
@@ -140,35 +149,11 @@ if __name__ == "__main__":
                            mass_prop,
                            specific_impulse,
                            ])
-
-    # TODO  REMOVE BEFORE FLIGHT
-    print('*** TEST *** mass_stage >>>', mass_stage[stage_add_data])
-    print('payload mass (kg):', mass_payload)
-
+    print('=' * 40)
 ###############################################################################
 
-# ####### Input data for calculations during build phase #################
-
-#     # Mass for each stage
-
-#     mass_stage = [[5000.0, 50000.0, 450],
-#                   [5000.0, 50000.0, 450],
-#                   [3000.0, 50000.0, 450],
-#                   ]
-
-#     mass_payload = 5000.0
-#     specific_impulse = 450
-#     number_of_stages = 2
-
-###############################################################################
 
 ############################ CALCULATE ########################################
-
-    # TODO remove testing code once finalized
-    print('payload mass (kg):', mass_payload)
-    print(mass_stage)
-    print('length of mass_stage list: ', len(mass_stage))
-    print('**** END ****')
 
     # For each stage, gather Mass Initial and Mass Final (Mass Final includes
     # Structure)
@@ -179,8 +164,9 @@ if __name__ == "__main__":
         mass_final = 0
 
         for current_stage in range(delta_v_stage_number, number_of_stages):
-            print('stage number: ', delta_v_stage_number + 1)
-            print('stage to include in delta v calculation: ', current_stage + 1)
+            # Keep for future use
+            # print('stage number: ', delta_v_stage_number + 1)
+            # print('stage to include in delta v calculation: ', current_stage + 1)
 
             # calculate Mass Initial and Mass Final for current stage
             mass_initial += (mass_stage[delta_v_stage_number][0] +
@@ -191,20 +177,24 @@ if __name__ == "__main__":
         mass_final = mass_initial - mass_stage[delta_v_stage_number][1]
         v_exhaust = mass_stage[delta_v_stage_number][2] * GRAVITY_EARTH
 
-        print(f"Stage {delta_v_stage_number} Mass Initial: {mass_initial:,}")
-        print(f"Stage {delta_v_stage_number} Mass Final: {mass_final:,}")
-        print(f"Stage {delta_v_stage_number} V Exhaust: {v_exhaust:,.4f}")
+        # Keep for future use
+        # print(f"Stage {delta_v_stage_number} Mass Initial: {mass_initial:,}")
+        # print(f"Stage {delta_v_stage_number} Mass Final: {mass_final:,}")
+        # print(f"Stage {delta_v_stage_number} V Exhaust: {v_exhaust:,.4f}")
 
         delta_v_data.append(delta_v_calc(mass_initial,
                                          mass_final,
                                          v_exhaust,
                                          ))
 
-        print('=' * 40)
-
-    print('**** delta_v_data: ****')
+    print('=' * 40)
+    print('*' * 40)
+    print('************ DELTA-V DATA: *************')
+    print("*")
 
     for _, delta_v_figure in enumerate(delta_v_data):
-        print(f"Delta V for stage {_ + 1}: {delta_v_figure:,.4f}")
+        print(f"*    Delta V for stage {_ + 1}: {delta_v_figure:,.4f}")
 
-    print(f"Total Delta V: {sum(delta_v_data):,.4f}")
+    print(f"*    Total Delta V: {sum(delta_v_data):,.4f}")
+    print("*")
+    print('*' * 40)
